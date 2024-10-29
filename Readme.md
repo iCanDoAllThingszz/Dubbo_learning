@@ -52,3 +52,146 @@ Dubbo最开始是阿里内部使用的rpc框架, 2011年对外提供, 2012年停
 - 缺点: 需要对redis进行一些配置(比如时间同步)
 
 # 章节5 第一个Dubbo项目-parent工程的编写
+配置父项目的pom.xml
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.zy</groupId>
+  <artifactId>Dubbo</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>Archetype - Dubbo</name>
+  <url>http://maven.apache.org</url>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.10.RELEASE</version>
+  </parent>
+
+  <properties>
+    <spring-boot-starter.version>2.1.10.RELEASE</spring-boot-starter.version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <version>${spring-boot-starter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>2.1.0.RELEASE</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.dubbo</groupId>
+        <artifactId>dubbo-spring-boot-starter</artifactId>
+        <version>2.7.3</version>
+      </dependency>
+      <!--内嵌zookeeper-->
+      <dependency>
+        <groupId>org.apache.curator</groupId>
+        <artifactId>curator-recipes</artifactId>
+        <version>4.2.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.curator</groupId>
+        <artifactId>curator-framework</artifactId>
+        <version>4.2.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>
+
+```
+
+# 章节6 第一个Dubbo项目-接口&Provider编写
+创建api模块 新建 -> DemoDubboService接口
+
+新建provider模块 新建 -> DemoDubboServiceImpl实现类:
+
+```java
+package demo.service;/**
+ * @Author:zhoayu
+ * @Date:2024/10/29 12:33
+ * @Description:demo.service
+ * @version:1.0
+ */
+
+
+import org.apache.dubbo.config.annotation.Service;
+
+/**
+ * @ClassName DemoDubboServiceImpl
+ * @Description //TODO 
+ * @Author zhaoyu
+ * @Date 2024/10/29
+ */
+// 注意这里的@Service注解要使用org.apache.dubbo.config.annotation.Service, 否则dubbo会认为这是一个consumer 不是一个provider
+// 标识有dubbo的@Service的bean中的方法就会被注册到registry中
+@Service
+public class DemoDubboServiceImpl implements DemoDubboService {
+
+    @Override
+    public String demo(String param) {
+        System.out.println("demo方法执行了");
+        return param + "demo123";
+    }
+}
+
+```
+
+provider模块的启动类ProviderApplicatio:
+
+```java
+package demo; /**
+ * @Author:zhoayu
+ * @Date:2024/10/29 12:36
+ * @Description:PACKAGE_NAME
+ * @version:1.0
+ */
+
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * @ClassName demo.ProviderApplication
+ * @Description //TODO 
+ * @Author zhaoyu
+ * @Date 2024/10/29
+ */
+@SpringBootApplication
+@EnableDubbo
+public class ProviderApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ProviderApplication.class, args);
+    }
+}
+```
+
+# 章节7 第一个Dubbo项目-Consumer编写
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

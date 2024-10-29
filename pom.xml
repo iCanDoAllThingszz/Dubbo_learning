@@ -4,6 +4,51 @@
   <groupId>org.zy</groupId>
   <artifactId>Dubbo</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
   <name>Archetype - Dubbo</name>
   <url>http://maven.apache.org</url>
+  <modules>
+    <module>api</module>
+    <module>provider</module>
+  </modules>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.10.RELEASE</version>
+  </parent>
+
+  <properties>
+    <spring-boot-starter.version>2.1.10.RELEASE</spring-boot-starter.version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <version>${spring-boot-starter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>2.1.0.RELEASE</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.dubbo</groupId>
+        <artifactId>dubbo-spring-boot-starter</artifactId>
+        <version>2.7.3</version>
+      </dependency>
+      <!--内嵌zookeeper-->
+      <dependency>
+        <groupId>org.apache.curator</groupId>
+        <artifactId>curator-recipes</artifactId>
+        <version>4.2.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.curator</groupId>
+        <artifactId>curator-framework</artifactId>
+        <version>4.2.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
