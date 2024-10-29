@@ -291,6 +291,23 @@ server:
 > provider注册接口信息到zookeeper中, consumer从zookeeper中获取provider的ip, 访问端口等信息, 进行rpc调用
 
 # 章节9 Dubbo的Admin界面搭建
+/opt/dubbo-admin-0.2.0.jar(springboot项目, 占用8080端口, 我们修改为9998) 修改该jar包中的application.properties文件的zookeeper地址
 
+[如何在mac中修改jar包中的内容](https://juejin.cn/post/7317462907302379555)
 
+启动zookeeper服务:
+```shell
+./zkServer.sh start
+```
+
+这里我们使用java1.8来启动admin服务, 避免报错:
+```shell
+/Library/Java/JavaVirtualMachines/jdk-1.8.jdk/Contents/Home/bin/java -jar dubbo-admin-0.2.0.jar
+```
+
+访问 http://localhost:9998/ 进入dubbo-admin管理界面:
+
+![img_2.png](img_2.png)
+
+# 章节10 Dubbo的负载均衡效果
 
