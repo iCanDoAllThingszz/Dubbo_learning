@@ -10,6 +10,7 @@
   <modules>
     <module>api</module>
     <module>provider</module>
+    <module>consumer</module>
   </modules>
 
   <parent>

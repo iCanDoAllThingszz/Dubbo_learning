@@ -21,7 +21,7 @@ public class DemoDubboServiceImpl implements  DemoDubboService {
 
     @Override
     public String demo(String param) {
-        System.out.println("demo方法执行了");
-        return param + "demo123";
+        System.out.println("rpc : demo方法执行了");
+        return param + "rpc : demo123";
     }
 }

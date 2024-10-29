@@ -143,7 +143,7 @@ public class DemoDubboServiceImpl implements DemoDubboService {
 
 ```
 
-provider模块的启动类ProviderApplicatio:
+provider模块的启动类ProviderApplication:
 
 ```java
 package demo; /**
@@ -173,25 +173,124 @@ public class ProviderApplication {
 ```
 
 # 章节7 第一个Dubbo项目-Consumer编写
+新建conusmer模块, 请求顺序: http请求 -> consumer的http接口 -> 业务逻辑通过rpc调用provider的接口 -> 返回
+
+rpc服务调用者:
+
+```java
+import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.stereotype.Service;
+
+/**
+ * @ClassName service.DemoServiceImpl
+ * @Description //TODO 
+ * @Author zhaoyu
+ * @Date 2024/10/29
+ */
+
+// consumer的@Service注解使用spring的@Service
+@Service
+public class DemoServiceImpl implements DemoService {
+    //使用Dubbo的@Reference注解完成注入
+    @Reference
+    private DemoDubboService demoDubboService;
+
+    @Override
+    public String demo(String param) {
+        //通过rpc的方式远程调用服务的provider
+        return demoDubboService.demo(param);
+    }
+}
+
+```
+
+consumer启动类:
+
+```java
+@SpringBootApplication
+@EnableDubbo
+public class ConsuemrSpringApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ConsuemrSpringApplication.class, args);
+    }
+}
+```
+
+controller代码:
+
+```java
+@RestController
+public class ConsumerController {
+    @Autowired
+    private DemoService demoService;
+
+    @RequestMapping("/demo")
+    public String demo(@RequestParam("name") String param){
+        return demoService.demo(param);
+    }
+}
+```
+
+provider配置信息:
+
+```yaml
+# provider dubbo配置信息
+dubbo:
+  application:
+    name: dubbo-provider
+  registry:
+    address: zookeeper://127.0.0.1:2181
+
+```
+
+consumer配置信息:
+
+```yaml
+# consumer dubbo配置信息
+dubbo:
+  application:
+    name: dubbo-consuemr
+  registry:
+    address: zookeeper://127.0.0.1:2181
+server:
+  port: 9999
 
 
+```
 
+# 章节8 第一个Dubbo项目-测试
+1. 启动zookeeper
+```shell
+/opt/apache-zookeeper-3.8.4-bin/bin
 
+./zkServer.sh start
+```
 
+2. 启动provider
+注意需要用java1.8 否则报错
 
+启动provider后, 访问zookeeper, 可以看到provider的信息
 
+```shell
+./zkCli.sh # 进入zookeeper客户端
 
+[zk: localhost:2181(CONNECTED) 1] ls /dubbo
+[demo.service.DemoDubboService]
 
+[zk: localhost:2181(CONNECTED) 2] get /dubbo/demo.service.DemoDubboService 
+127.0.0.1
+```
+3. 启动consuemr
 
+4. 访问consumer的接口
 
+![img_1.png](img_1.png)
 
+访问链路: 用户http请求 -> consumer的controller -> consuemr的业务层通过dubbo rpc的方式调用provider的DemoDubboService接口中的demo方法 -> 返回结果
 
+> provider注册接口信息到zookeeper中, consumer从zookeeper中获取provider的ip, 访问端口等信息, 进行rpc调用
 
-
-
-
-
-
+# 章节9 Dubbo的Admin界面搭建
 
 
 

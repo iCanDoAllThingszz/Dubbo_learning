@@ -1,0 +1,8 @@
+# consumer dubbo配置信息
+dubbo:
+  application:
+    name: dubbo-consuemr
+  registry:
+    address: zookeeper://127.0.0.1:2181
+server:
+  port: 9999
