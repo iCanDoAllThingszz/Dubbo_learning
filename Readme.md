@@ -310,4 +310,63 @@ server:
 ![img_2.png](img_2.png)
 
 # 章节10 Dubbo的负载均衡效果
+Dubbo默认就会负载均衡的访问provider, 默认的负载均衡策略是随机访问
 
+##### Dubbo内置的四个负载均衡策略
+- Random: 随机访问集群中的各个节点, 访问概率和节点的权重配置有关(性能好的服务器的被访问频率应该高一些)。
+- RoundRobin: 轮训访问集群中的各个节点, 访问频率和权重有关。
+- LeastActive: 活跃数越低的节点越优先访问 [Dubbo的负载均衡策略: 最小活跃调用策略](https://cloud.tencent.com/developer/article/1408342)
+- ConsistentHash: 使用一致性hash算法访问集群中的节点 [Dubbo负载均衡策略: 一致性hash策略](https://cloud.tencent.com/developer/article/1950684)
+
+##### 设置负载均衡策略
+- 服务消费者的@Reference注解中设置loadbalance属性
+```java
+@Reference(loadbalance = "roundrobin")
+private DemoDubboService demoDubboService;
+```
+- 服务提供者的@Service注解中设置loadbalance属性, weight属性(设置权重, 权重越大, 被访问的概率越高
+```java
+@Service(loadbalance = "roundrobin", weight=4)
+public class DemoDubboServiceImpl implements DemoDubboService {
+    
+}
+```
+- 全局配置文件application.properties中设置dubbo.loadbalance属性
+```yaml
+dubbo:
+  provider: 
+    loadbalance: roundrobin
+```
+# 章节11 Dubbo项目练习-数据库
+
+![img_3.png](img_3.png)
+
+emp模块和dept模块分开
+
+##### 1.准备数据库表
+```sql
+create database dubbo_test;
+
+use dubbo_test;
+
+create table dept(
+id int(11) primary key auto_increment,
+name varchar(20)
+);
+
+insert into dept values(null, '开发部');
+insert into dept values(null, '产品部');
+
+select * from dept;
+
+create table emp(
+id int(11) primary key auto_increment,
+name varchar(20),
+photo varchar(200),
+did int(11),
+CONSTRAINT fk_emp_dept FOREIGN KEY (did) REFERENCES dept(id)
+);
+
+```
+
+# 章节12 Dubbo项目练习-parent模块
