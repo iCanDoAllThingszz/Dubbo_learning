@@ -370,3 +370,12 @@ CONSTRAINT fk_emp_dept FOREIGN KEY (did) REFERENCES dept(id)
 ```
 
 # 章节12 Dubbo项目练习-parent模块
+修改pom.xml文件
+
+[dependencies和dependencyManagement的区别](https://blog.csdn.net/zhangzehai2234/article/details/88374477)
+
+
+
+
+
+
