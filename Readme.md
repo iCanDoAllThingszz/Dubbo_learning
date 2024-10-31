@@ -427,3 +427,4 @@ spring:
 创建dept模块
 
 # 章节18 Dubbo项目练习-部门显示功能实现
+调用顺序: http请求 -> dept模块controller -> dept模块service层 -> rpc -> provider模块service层 -> mapper模块查询数据库 -> 返回

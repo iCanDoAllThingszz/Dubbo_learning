@@ -6,4 +6,7 @@
 		就可以直接填写缩写，不区分大小写，直接通过方法名去找类型-->
 <mapper namespace="mapper.DeptMapper">
 
+    <select id="findAllDepts" resultType="pojo.Dept">
+        select id, name from dept;
+    </select>
 </mapper>
