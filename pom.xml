@@ -12,6 +12,9 @@
     <module>provider</module>
     <module>consumer</module>
     <module>pojo</module>
+    <module>mapper</module>
+    <module>mapper</module>
+    <module>dept</module>
   </modules>
 
   <parent>

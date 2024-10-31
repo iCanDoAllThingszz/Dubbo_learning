@@ -4,3 +4,9 @@ dubbo:
     name: dubbo-provider
   registry:
     address: zookeeper://127.0.0.1:2181
+
+
+# 加载其他的application-*配置文件, active后写*, 如果有多个配置文件, 用逗号隔开
+spring:
+  profiles:
+    active: test

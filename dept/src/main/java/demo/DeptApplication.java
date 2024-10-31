@@ -1,27 +1,28 @@
-package demo;
-/**
+package demo;/**
  * @Author:zhoayu
- * @Date:2024/10/29 12:36
- * @Description:PACKAGE_NAME
+ * @Date:2024/10/31 12:36
+ * @Description:demo
  * @version:1.0
  */
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import javax.swing.*;
+
 /**
- * @ClassName demo.ProviderApplication
+ * @ClassName DeptApplication
  * @Description //TODO 
  * @Author zhaoyu
- * @Date 2024/10/29
+ * @Date 2024/10/31
  */
 @SpringBootApplication
 @EnableDubbo
-@MapperScan("mapper")
-public class ProviderApplication {
+public class DeptApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ProviderApplication.class, args);
+        SpringApplication.run(DeptApplication.class, args);
     }
 }
+
+ 

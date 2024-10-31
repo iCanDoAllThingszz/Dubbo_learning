@@ -374,7 +374,7 @@ CONSTRAINT fk_emp_dept FOREIGN KEY (did) REFERENCES dept(id)
 
 [dependencies和dependencyManagement的区别](https://blog.csdn.net/zhangzehai2234/article/details/88374477)
 
-# 章节13 Dubbo项目联系-pojo模块
+# 章节13 Dubbo项目练习-pojo模块
 创建pojo模块, 新建实体类Dept和Emp
 
 Dept:
@@ -406,5 +406,24 @@ public class Emp implements Serializable {
 
 ```
 
+# 章节14 Dubbo项目练习-mapper模块
+新建mapper模块
+
+# 章节15 Dubbo项目练习-api模块
+
+# 章节16 Dubbo项目练习-provider模块
+application-test.yaml, application.yaml
 
 
+application.yaml:
+```yaml
+# 加载其他的application-*配置文件, active后写*, 如果有多个配置文件, 用逗号隔开
+spring:
+  profiles:
+    active: test
+```
+
+# 章节17 Dubbo项目练习-dept模块
+创建dept模块
+
+# 章节18 Dubbo项目练习-部门显示功能实现
