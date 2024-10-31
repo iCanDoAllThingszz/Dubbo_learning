@@ -374,8 +374,37 @@ CONSTRAINT fk_emp_dept FOREIGN KEY (did) REFERENCES dept(id)
 
 [dependencies和dependencyManagement的区别](https://blog.csdn.net/zhangzehai2234/article/details/88374477)
 
+# 章节13 Dubbo项目联系-pojo模块
+创建pojo模块, 新建实体类Dept和Emp
 
+Dept:
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Dept implements Serializable {
+    private Integer id;
+    private String name;
+}
 
+```
+
+Emp:
+```java
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Emp implements Serializable {
+    private Integer id;
+
+    private String name;
+
+    private String photo;
+
+    private Integer did;
+}
+
+```
 
 
 
